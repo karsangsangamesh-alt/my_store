@@ -11,8 +11,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 // Tabs components are imported but not used in the current implementation
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Loader2, LogOut, User, Package, CreditCard, HelpCircle, Settings } from 'lucide-react';
-import { useAuth } from '@/hooks/useAuth';
+
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useAuth } from '@/hooks/useAuth';
 import { formatPrice } from '@/utils/formatPrice';
 
 type ProfileFormData = {
@@ -39,7 +40,7 @@ type Order = {
 
 export default function AccountPage() {
   const router = useRouter();
-  const { user, signOut } = useAuth();
+  const { user, signOut: signOutFunction } = useAuth();
   const supabase = createClientComponentClient();
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('profile');
@@ -121,7 +122,7 @@ export default function AccountPage() {
 
   // Handle logout
   const handleLogout = async () => {
-    await signOut();
+    await signOutFunction();
     router.push('/auth/login');
   };
 

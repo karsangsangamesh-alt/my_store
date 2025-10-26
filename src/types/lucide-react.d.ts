@@ -63,4 +63,10 @@ declare module 'lucide-react' {
   export const ArrowRight: LucideIcon;
   export const ArrowUp: LucideIcon;
   export const ArrowDown: LucideIcon;
+
+  // Account & Commerce Icons (from account page)
+  export const LogOut: LucideIcon;
+  export const Package: LucideIcon;
+  export const CreditCard: LucideIcon;
+  export const HelpCircle: LucideIcon;
 }
