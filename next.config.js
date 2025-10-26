@@ -1,10 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
+  images: {
+    domains: [
+      'localhost',
+      'https://wrenynqvwkktvcqshyrm.supabase.co', // Replace with your actual Supabase URL
+      'images.unsplash.com', // For demo images
+      'my-store-hazel-seven.vercel.app', // Your deployment domain
+    ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
-  // 👇 This tells Next.js to look inside "src"
-  srcDir: 'src',
+  experimental: {
+    serverActions: {
+      allowedOrigins: [
+        'localhost:3000',
+        'my-store-hazel-seven.vercel.app', // Your deployment domain
+      ],
+    },
+  },
 };
 
 export default nextConfig;
