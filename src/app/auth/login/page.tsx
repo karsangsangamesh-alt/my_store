@@ -1,5 +1,7 @@
 'use client';
 
+// Login page with manual zod validation
+
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';

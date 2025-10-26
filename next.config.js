@@ -1,13 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ['localhost', 'your-supabase-project.supabase.co'],
-  },
   experimental: {
-    serverActions: {
-      allowedOrigins: ['localhost:3000'],
-    },
+    appDir: true,
   },
+  // 👇 This tells Next.js to look inside "src"
+  srcDir: 'src',
 };
 
-module.exports = nextConfig;
+export default nextConfig;
