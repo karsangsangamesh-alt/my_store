@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -30,20 +29,34 @@ export default function LoginPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
-  });
+    setError,
+    clearErrors,
+  } = useForm<LoginFormData>();
 
   const onSubmit = async (data: LoginFormData) => {
     try {
       setIsSubmitting(true);
+      clearErrors();
+
+      // Validate with zod
+      const result = loginSchema.safeParse(data);
+      if (!result.success) {
+        result.error.issues.forEach((error: z.ZodIssue) => {
+          setError(error.path[0] as keyof LoginFormData, {
+            type: 'manual',
+            message: error.message,
+          });
+        });
+        return;
+      }
+
       const { error } = await signIn(data.email, data.password);
-      
+
       if (error) {
         toast.error(error.message);
         return;
       }
-      
+
       toast.success('Logged in successfully!');
       router.push(redirectTo);
     } catch (error) {
