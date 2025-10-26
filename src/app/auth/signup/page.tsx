@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -35,13 +34,27 @@ export default function SignupPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignupFormData>({
-    resolver: zodResolver(signupSchema),
-  });
+    setError,
+    clearErrors,
+  } = useForm<SignupFormData>();
 
   const onSubmit = async (data: SignupFormData) => {
     try {
       setIsSubmitting(true);
+      clearErrors();
+
+      // Validate with zod
+      const result = signupSchema.safeParse(data);
+      if (!result.success) {
+        result.error.issues.forEach((error: z.ZodIssue) => {
+          setError(error.path[0] as keyof SignupFormData, {
+            type: 'manual',
+            message: error.message,
+          });
+        });
+        return;
+      }
+
       const { error } = await signUp(data.email, data.password, data.name);
       
       if (error) {
