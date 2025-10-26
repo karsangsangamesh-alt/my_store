@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 // Tabs components are imported but not used in the current implementation
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Loader2, LogOut, User, Package, CreditCard, HelpCircle, Settings } from 'lucide-react';
+import { Loader2, User, Package, CreditCard, HelpCircle, Settings } from 'lucide-react';
 
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useAuth } from '@/hooks/useAuth';
@@ -199,7 +199,6 @@ export default function AccountPage() {
                 className="w-full"
                 onClick={handleLogout}
               >
-                <LogOut className="mr-2 h-4 w-4" />
                 Logout
               </Button>
             </CardFooter>

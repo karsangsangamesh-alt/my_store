@@ -3,15 +3,14 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { LogOut, LayoutDashboard, Package, Tag, ShoppingCart, Image as ImageIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const navItems = [
-  { name: 'Dashboard', href: '/admin/dashboard', icon: <LayoutDashboard className="h-5 w-5" /> },
-  { name: 'Products', href: '/admin/products', icon: <Package className="h-5 w-5" /> },
-  { name: 'Categories', href: '/admin/categories', icon: <Tag className="h-5 w-5" /> },
-  { name: 'Orders', href: '/admin/orders', icon: <ShoppingCart className="h-5 w-5" /> },
-  { name: 'Banners', href: '/admin/banners', icon: <ImageIcon className="h-5 w-5" /> },
+  { name: 'Dashboard', href: '/admin/dashboard', icon: '📊' },
+  { name: 'Products', href: '/admin/products', icon: '📦' },
+  { name: 'Categories', href: '/admin/categories', icon: '🏷️' },
+  { name: 'Orders', href: '/admin/orders', icon: '🛒' },
+  { name: 'Banners', href: '/admin/banners', icon: '🖼️' },
 ]
 
 export default function AdminSidebar() {
@@ -39,7 +38,7 @@ export default function AdminSidebar() {
                 : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
-            {item.icon}
+            <span className="text-lg">{item.icon}</span>
             <span>{item.name}</span>
           </Link>
         ))}
@@ -50,7 +49,6 @@ export default function AdminSidebar() {
           onClick={handleSignOut}
           className="w-full justify-start text-gray-700 hover:bg-red-50 hover:text-red-600"
         >
-          <LogOut className="mr-2 h-4 w-4" />
           Sign out
         </Button>
       </div>
