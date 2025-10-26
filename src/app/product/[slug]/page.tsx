@@ -333,7 +333,7 @@ export default function ProductPage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Description</h2>
             <div className="prose prose-gray max-w-none">
               <p className="text-gray-600">
-                {product.metadata?.description ||
+                {product.metadata?.description?.toString() ||
                  'This is a high-quality product designed to meet your needs. Made with premium materials and attention to detail, this item offers both style and functionality.'}
               </p>
             </div>

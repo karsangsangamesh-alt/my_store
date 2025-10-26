@@ -5,6 +5,7 @@ export interface CartItem {
   product: Product;
   quantity: number;
   price: number;
+  metadata?: { size?: string; color?: string };
 }
 
 export interface CartState {

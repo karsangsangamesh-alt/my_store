@@ -4,14 +4,6 @@ import { useCart } from '@/hooks/useCart';
 import { formatPrice } from '@/utils/formatPrice';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CartItem } from '@/types/Order';
-
-interface Product {
-  id: string;
-  title: string;
-  price: number;
-  images: string[];
-}
 
 interface CartDrawerProps {
   isOpen: boolean;

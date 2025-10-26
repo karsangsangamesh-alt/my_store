@@ -74,18 +74,18 @@ export function AlertDialog({
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
           if (child.type === AlertDialogTrigger) {
-            return React.cloneElement(child, {
+            return React.cloneElement(child as React.ReactElement<{ onClick?: () => void; className?: string }>, {
               onClick: () => handleOpenChange(true),
-              className: child.props.className
+              className: (child.props as { className?: string }).className
             })
           }
           if (child.type === AlertDialogContent) {
             return isOpen ? child : null
           }
           if (child.type === AlertDialogCancel || child.type === AlertDialogAction) {
-            return React.cloneElement(child, {
+            return React.cloneElement(child as React.ReactElement<{ onClick?: (e: React.MouseEvent) => void }>, {
               onClick: (e: React.MouseEvent) => {
-                child.props.onClick?.(e)
+                (child.props as { onClick?: (e: React.MouseEvent) => void }).onClick?.(e)
                 handleOpenChange(false)
               }
             })
@@ -104,8 +104,8 @@ export function AlertDialogTrigger({
   className
 }: AlertDialogTriggerProps) {
   if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children, {
-      onClick: (children.props as any).onClick
+    return React.cloneElement(children as React.ReactElement<{ onClick?: () => void }>, {
+      onClick: (children.props as { onClick?: () => void }).onClick
     })
   }
 

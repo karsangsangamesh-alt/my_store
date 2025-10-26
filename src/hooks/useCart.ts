@@ -26,7 +26,8 @@ export function useCart() {
           id: item.id,
           product: item.product,
           quantity: item.quantity,
-          price: item.product?.price || 0
+          price: item.product?.price || 0,
+          metadata: item.metadata
         }));
         setItems(cartItems);
       }
@@ -74,7 +75,8 @@ export function useCart() {
         id: data.id,
         product: data.product,
         quantity: data.quantity,
-        price: data.product?.price || 0
+        price: data.product?.price || 0,
+        metadata: data.metadata
       };
       setItems([...items, newItem]);
     }
